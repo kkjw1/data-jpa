@@ -40,7 +40,7 @@ dependencies {
         exclude group: "org.hamcrest", module: "hamcrest-core"
     }
 
-//    //로그 쿼리 파라미터에 ? 대신 실제 값이 뜨도록 라이브러리 추가
+    //로그 쿼리 파라미터에 ? 대신 실제 값이 뜨도록 라이브러리 추가, 현재는 작동안함
 //    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
 
 }
