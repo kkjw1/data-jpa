@@ -1,5 +1,8 @@
 package study.data_jpa.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +32,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findListByUsername(String username);
     Member findMemberByUsername(String username);
     Optional<Member> findOptionalByUsername(String username);
+
+    //카운트 관련 쿼리도 조인을해서 복잡하게 가져가면 성능이 나빠진다. 카운트 쿼리만 따로 DB에서 심플하게 가져올 수 있다.
+    @Query(value = "select m from Member m left join m.team",
+            countQuery = "select count(m.username) from Member m")
+    Page<Member> findByAge(int age, Pageable pageable);
+//    Slice<Member> findByAge(int age, Pageable pageable);
+//    List<Member> findByAge(int age, Pageable pageable);
 }
